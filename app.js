@@ -8,6 +8,7 @@ const passport = require("passport");
 const mongoose = require("mongoose");
 
 var routes = require("./routes/index");
+const setUpPassport = require("./setuppassport");
 
 const mongoDb =
   "mongodb+srv://members-only:members-only666@cluster0.rlfq1bo.mongodb.net/members_only2?retryWrites=true&w=majority";
@@ -16,6 +17,7 @@ const db = mongoose.connection;
 db.on("error", console.error.bind(console, "mongo connection error"));
 
 var app = express();
+setUpPassport();
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
