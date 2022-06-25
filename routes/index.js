@@ -1,12 +1,19 @@
 var express = require("express");
 const passport = require("passport");
+const bcrypt = require("bcryptjs");
 var router = express.Router();
 
 const User = require("../models/user");
 
+// custom middleware, access to currentUser in all views
+router.use(function (req, res, next) {
+  res.locals.currentUser = req.user;
+  next();
+});
+
 /* GET home page. */
 router.get("/", function (req, res, next) {
-  res.render("index", { user: req.user });
+  res.render("index");
 });
 
 router.get("/signup", function (req, res, next) {
@@ -14,14 +21,19 @@ router.get("/signup", function (req, res, next) {
 });
 
 router.post("/signup", function (req, res, next) {
-  const user = new User({
-    username: req.body.username,
-    password: req.body.password,
-  }).save((err) => {
+  bcrypt.hash(req.body.password, 10, (err, hashedPassword) => {
     if (err) {
       return next(err);
     }
-    res.redirect("/");
+    const user = new User({
+      username: req.body.username,
+      password: hashedPassword,
+    }).save((err) => {
+      if (err) {
+        return next(err);
+      }
+      res.redirect("/");
+    });
   });
 });
 
