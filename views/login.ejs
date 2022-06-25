@@ -1,12 +1,10 @@
 <% include _header %>
-<h1>Sign Up</h1>
+<h1>Log In</h1>
 <form action="" method="POST">
   <label for="username">Username</label>
   <input name="username" placeholder="username" type="text" />
   <label for="password">Password</label>
   <input name="password" type="password" />
-  <button>Sign Up</button>
+  <button>Log In</button>
 </form>
-<% errors.forEach(function(error) { %>
-<div><%= error %></div>
-<% }) %> <% include _footer %>
+<% include _footer %>

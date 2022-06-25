@@ -6,8 +6,9 @@ var logger = require("morgan");
 const session = require("express-session");
 const passport = require("passport");
 const mongoose = require("mongoose");
+var flash = require("connect-flash");
 
-var routes = require("./routes/index");
+var routes = require("./routes/routes");
 const setUpPassport = require("./setuppassport");
 
 const mongoDb =
@@ -40,6 +41,7 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.urlencoded({ extended: false }));
+app.use(flash());
 
 app.use(routes);
 
