@@ -5,8 +5,12 @@
   <input name="username" placeholder="username" type="text" />
   <label for="password">Password</label>
   <input name="password" type="password" />
+  <label for="password">Confirm Password</label>
+  <input name="confirmPassword" type="password" />
   <button>Sign Up</button>
 </form>
-<% errors.forEach(function(error) { %>
+<% if (validationErr.length) {%> <% validationErr.forEach(function(valErr) { %>
+<div><%= valErr.msg %></div>
+<% }) %> <%}%> <% errors.forEach(function(error) { %>
 <div><%= error %></div>
 <% }) %> <% include _footer %>
