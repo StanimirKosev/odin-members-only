@@ -1,12 +1,14 @@
 <% include _header %>
-<h1>Log In</h1>
-<form action="" method="POST">
-  <label for="username">Username</label>
-  <input name="username" placeholder="username" type="text" />
-  <label for="password">Password</label>
-  <input name="password" type="password" />
-  <button>Log In</button>
-</form>
-<% errors.forEach(function(error) { %>
-<div><%= error %></div>
-<% }) %> <% include _footer %>
+<div class="login-form">
+  <h1>Log In.</h1>
+  <img src="images/anonim.png" alt="" />
+  <form action="" method="POST">
+    <input name="username" placeholder="Username" type="text" />
+    <input name="password" placeholder="Password" type="password" />
+    <button>Log In</button>
+  </form>
+  <% errors.forEach(function(error) { %>
+  <div class="error"><%= error %>.</div>
+  <% }) %>
+</div>
+<% include _footer %>

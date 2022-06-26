@@ -1,15 +1,16 @@
 <footer>
-    <% if (currentUser) {%>
-        <div>
-          <div>Logged in as <strong><%= currentUser.username %></strong></div>
-        </div>
+  <a href="https://github.com/StanimirKosev">Project by: Stanimir Kosev <img src="images/github.png" alt=""/></a>  
+  <div class="footer-content">  
+  <% if (currentUser) {%>
+          <div><img src="images/user.png" alt=""/>
+            <%= currentUser.username %></div>
         <% if (currentUser.membershipStatus === true) {%>
-            <div>Member Check</div>
-            <%}%>
+            <div>Membership <img src="images/check-green.png" alt=""/></div>
+            <%} else {%>
+              <div>Membership    <img src="images/hiks.png" alt=""/></div>
+          <%}%>
         <% } %>
-        <div>
-            Project By Sami
-        </div>    
+      </div>
 </footer>
 </body>
 </html>

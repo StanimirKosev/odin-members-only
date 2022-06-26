@@ -1,13 +1,17 @@
-<% include _header %> <% if (currentUser.membershipStatus === true) {%>
-<div>You are already a member.</div>
-<%} else {%>
-<form action="" method="post">
-  <label for="passcode">Secret Passcode:</label>
-  <input id="passcode" name="passcode" type="text" />
-  <input name="id" type="hidden" value="<%= currentUser.id %>" />
-  <button>Submit</button>
-</form>
-<%}%> <% if (validationErr.length) {%> <% validationErr.forEach(function(valErr)
-{ %>
-<div><%= valErr.msg %></div>
-<% }) %> <%}%> <% include _footer %>
+<% include _header %>
+<div class="membership-form">
+  <% if (currentUser.membershipStatus === true) {%>
+  <h1>You are already a member.<h1>
+  <%} else {%>
+  <h1>Become one of us.</h1>
+  <form action="" method="post">
+    <input name="passcode" type="password" placeholder="Secret passcode" />
+    <input name="id" type="hidden" value="<%= currentUser.id %>" />
+    <button>Submit</button>
+  </form>
+  <%}%> <% if (validationErr.length) {%> <%
+  validationErr.forEach(function(valErr) { %>
+  <div class="error"><%= valErr.msg %></div>
+  <% }) %> <%}%>
+</div>
+<% include _footer %>

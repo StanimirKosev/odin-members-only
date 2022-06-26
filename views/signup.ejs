@@ -1,16 +1,22 @@
 <% include _header %>
-<h1>Sign Up</h1>
-<form action="" method="POST">
-  <label for="username">Username</label>
-  <input name="username" placeholder="username" type="text" />
-  <label for="password">Password</label>
-  <input name="password" type="password" />
-  <label for="password">Confirm Password</label>
-  <input name="confirmPassword" type="password" />
-  <button>Sign Up</button>
-</form>
-<% if (validationErr.length) {%> <% validationErr.forEach(function(valErr) { %>
-<div><%= valErr.msg %></div>
-<% }) %> <%}%> <% errors.forEach(function(error) { %>
-<div><%= error %></div>
-<% }) %> <% include _footer %>
+<div class="signup-form">
+  <h1>Sign Up.</h1>
+  <img src="images/skeleton.png" alt="" />
+  <form action="" method="POST">
+    <input name="username" placeholder="Username" type="text" />
+    <input name="password" type="password" placeholder="Password" />
+    <input
+      name="confirmPassword"
+      type="password"
+      placeholder="Confirm password"
+    />
+    <button>Sign Up</button>
+  </form>
+  <% if (validationErr.length) {%> <% validationErr.forEach(function(valErr) {
+  %>
+  <div class="error"><%= valErr.msg %></div>
+  <% }) %> <%}%> <% errors.forEach(function(error) { %>
+  <div class="error"><%= error %></div>
+  <% }) %>
+</div>
+<% include _footer %>

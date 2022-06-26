@@ -1,19 +1,43 @@
-<% include _header %> <% msg.forEach(msg => {%>
-<div>
-  <div><%= msg.title %></div>
-  <div><%= msg.text %></div>
-  <!-- show author and date only when user is a member -->
-  <% if (currentUser) {%> <% if (currentUser.membershipStatus === true) {%>
-  <div><%= msg.author %></div>
-  <div><%= msg.createdAt %></div>
-  <%} else {%>
-  <div>Anonymous</div>
-  <div>Unknow date</div>
-  <%}%> <%} else {%>
-  <div>Anonymous</div>
-  <div>Unknow date</div>
-  <%}%>
+<% include _header %>
+<div class="index">
+  <% infos.forEach(function(info) { %>
+  <div class="info"><%= info %></div>
+  <% }) %> <% msg.forEach(msg => {%>
+  <div class="message">
+    <div><strong><%= msg.title %></strong></div>
+    <div class="text"><%= msg.text %></div>
+    <!-- show author and date only when user is a member -->
+    <% if (currentUser) {%> <% if (currentUser.membershipStatus === true) {%>
+    <div class="reverseMsg">
+      <div class="author">
+        <img alt="messageUser" src="images/user.png" /><%= msg.author %>
+      </div>
+    </div>
+    <div class="reverseMsg">
+      <div class="date">
+        <img alt="" src="images/clock.png" /><%= msg.createdAt %>
+      </div>
+    </div>
+    <%} else {%>
+    <div class="reverseMsg">
+      <div class="author">
+        <img alt="messageUser" src="images/user.png" />Anonymous
+      </div>
+    </div>
+    <div class="reverseMsg">
+      <div class="date"><img alt="" src="images/clock.png" />Unknown date</div>
+    </div>
+    <%}%> <%} else {%>
+    <div class="reverseMsg">
+      <div class="author">
+        <img alt="messageUser" src="images/user.png" />Anonymous
+      </div>
+    </div>
+    <div class="reverseMsg">
+      <div class="date"><img alt="" src="images/clock.png" />Unknown date</div>
+    </div>
+    <%}%>
+  </div>
+  <%})%>
 </div>
-<%})%> <% infos.forEach(function(info) { %>
-<div><%= info %></div>
-<% }) %> <% include _footer %>
+<% include _footer %>

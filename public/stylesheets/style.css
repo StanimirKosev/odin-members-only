@@ -1,8 +1,236 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font: 17px "Lucida Grande", Helvetica, Arial, sans-serif;
+  width: 100%;
+  min-height: 100vh;
+  background-color: #1b1b1b;
+  color: white;
+}
+
+header,
+footer {
+  background-color: #0f0f0f;
+  padding: 15px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  width: 100%;
+  z-index: 10;
+}
+
+header {
+  top: 0;
+}
+
+footer {
+  bottom: 0;
 }
 
 a {
-  color: #00B7FF;
+  color: inherit;
+  text-decoration: none;
+}
+
+a:hover {
+  opacity: 0.6;
+}
+
+.title {
+  font-size: 22px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+img[src*="members"] {
+  width: 40px;
+  height: 40px;
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.header-content > * {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+img[src*="logout"],
+img[src*="msg"],
+img[src*="login"],
+img[src*="signup2"] {
+  width: 35px;
+  height: 35px;
+}
+
+a[href*="github"] {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+img[src*="hiks"],
+img[src*="check-green"],
+img[src*="user"],
+img[src*="github"] {
+  width: 22px;
+  height: 22px;
+}
+
+footer {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+}
+
+.membership-form,
+.message-form,
+.signup-form,
+.login-form {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #0f0f0f;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30px 150px;
+  border-radius: 20px;
+  box-shadow: 5px 5px 5px #141414;
+}
+
+.message-form > *:not(form, .error),
+.membership-form > *:not(form, .error),
+.login-form > *:not(form, .error),
+.signup-form > *:not(form, .error) {
+  margin-bottom: 20px;
+}
+
+img[src*="skeleton"],
+img[src*="anonim"] {
+  width: 200px;
+  height: 200px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+form > * {
+  margin-bottom: 13px;
+}
+
+input {
+  padding: 6px 12px;
+  border-radius: 20px;
+  border: 1px solid #141414;
+  background-color: #141414;
+  color: white;
+  font-size: inherit;
+}
+
+input:focus {
+  outline: none !important;
+  border-color: #3b71ab;
+  box-shadow: 0 0 7px #719ece;
+}
+
+.error {
+  color: red;
+}
+
+button {
+  padding: 5px;
+  border-radius: 10px;
+  border: 1px solid #3b71ab;
+  background-color: #3b71ab;
+  font-size: inherit;
+  cursor: pointer;
+}
+
+button:hover {
+  opacity: 0.7;
+}
+
+.footer-content {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+}
+
+.footer-content > *:not(a) {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.info {
+  color: #3b71ab;
+  position: absolute;
+  top: 90px;
+}
+
+.index {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 130px;
+}
+
+.message {
+  background-color: #0f0f0f;
+  display: flex;
+  flex-direction: column;
+  padding: 30px 50px;
+  border-radius: 20px;
+  box-shadow: 5px 5px 5px #141414;
+  margin-bottom: 60px;
+  width: 45%;
+}
+
+.text {
+  background-color: #1b1b1b;
+  padding: 20px;
+  border-radius: 15px;
+}
+
+.message > * {
+  margin-bottom: 10px;
+}
+
+.author,
+.date {
+  background-color: #1b1b1b;
+  border-radius: 15px;
+  padding: 5px;
+  float: right;
+}
+
+img[src*="clock"],
+img[alt*="messageUser"] {
+  width: 20px;
+  height: 20px;
+}
+
+.reverseMsg {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.reverseMsg > * {
+  display: flex;
+  align-items: center;
+  gap: 5px;
 }

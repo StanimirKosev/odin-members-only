@@ -9,18 +9,20 @@
   </head>
   <body>
     <header>
-      <a href="/">Members Only</a>
+      <a href="/" class="title"
+        ><strong>Members Only</strong><img src="/images/members2.png" alt=""
+      /></a>
       <% if (currentUser) {%>
-      <div>
-        <a href="message-form">Create a new message</a>
-        <a href="membership">Gain membership status</a>
-        <a href="/log-out">Log Out</a>
+      <div class="header-content">
+        <a href="message-form"><img src="/images/msg.png"/>Create a new message</a>
+        <a href="membership"><img src="/images/check-green.png"/>Gain membership status</a>
+        <a href="/log-out"><img src="/images/logout.png"/>Log Out</a>
       </div>
       <% } else { %>
-        <div>
-          <a href="/sign-up">Sign Up</a>
-          <a href="/log-in">Log In</a>
-        </div>
+      <div class="header-content">
+        <a href="/sign-up"><img src="/images/signup2.png" /> Sign Up</a>
+        <a href="/log-in"> <img src="/images/login.png" />Log In</a>
+      </div>
       <%}%>
     </header>
 
