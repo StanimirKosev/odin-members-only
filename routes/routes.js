@@ -5,6 +5,7 @@ var router = express.Router();
 const { body, validationResult } = require("express-validator");
 
 const User = require("../models/user");
+const Message = require("../models/message");
 
 // custom middleware with usefull variables
 router.use(function (req, res, next) {
@@ -16,7 +17,14 @@ router.use(function (req, res, next) {
 });
 
 router.get("/", function (req, res) {
-  res.render("index");
+  Message.find()
+    .sort({ createdAt: "descending" })
+    .exec(function (err, msg) {
+      if (err) {
+        return next(err);
+      }
+      res.render("index", { msg: msg });
+    });
 });
 
 router.get("/sign-up", function (req, res) {
@@ -62,7 +70,7 @@ router.post(
         if (err) {
           return next(err);
         }
-        const user = new User({
+        new User({
           username: req.body.username,
           password: hashedPassword,
           membershipStatus: false,
@@ -139,4 +147,40 @@ router.post(
   }
 );
 
+router.get("/message-form", (req, res) => {
+  res.render("message-form");
+});
+
+router.post(
+  "/message-form",
+  body("title")
+    .trim()
+    .escape()
+    .isLength({ min: 1 })
+    .withMessage("Title must be specified."),
+  body("message")
+    .trim()
+    .escape()
+    .isLength({ min: 1 })
+    .withMessage("Message must be specified."),
+  (req, res, next) => {
+    if (!validationResult(req).isEmpty()) {
+      res.render("message-form", {
+        validationErr: validationResult(req).array(),
+      });
+    }
+    new Message({
+      title: req.body.title,
+      text: req.body.message,
+      createdAt: Date.now(),
+      author: req.body.author,
+    }).save((err) => {
+      if (err) {
+        return next(err);
+      }
+      req.flash("info", "Message created");
+      res.redirect("/");
+    });
+  }
+);
 module.exports = router;

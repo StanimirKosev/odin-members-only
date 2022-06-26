@@ -1,3 +1,19 @@
-<% include _header %> <% infos.forEach(function(info) { %>
+<% include _header %> <% msg.forEach(msg => {%>
+<div>
+  <div><%= msg.title %></div>
+  <div><%= msg.text %></div>
+  <!-- show author and date only when user is a member -->
+  <% if (currentUser) {%> <% if (currentUser.membershipStatus === true) {%>
+  <div><%= msg.author %></div>
+  <div><%= msg.createdAt %></div>
+  <%} else {%>
+  <div>Anonymous</div>
+  <div>Unknow date</div>
+  <%}%> <%} else {%>
+  <div>Anonymous</div>
+  <div>Unknow date</div>
+  <%}%>
+</div>
+<%})%> <% infos.forEach(function(info) { %>
 <div><%= info %></div>
 <% }) %> <% include _footer %>

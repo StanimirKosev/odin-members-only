@@ -7,7 +7,7 @@ const messageSchema = mongoose.model(
     title: { type: String, required: true },
     text: { type: String, required: true },
     createdAt: { type: Date, default: Date.now },
-    author: { type: Schema.Types.ObjectId, ref: "User" },
+    author: String,
   })
 );
 
