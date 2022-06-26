@@ -1,5 +1,15 @@
 <footer>
-    
+    <% if (currentUser) {%>
+        <div>
+          <div>Logged in as <strong><%= currentUser.username %></strong></div>
+        </div>
+        <% if (currentUser.membershipStatus === true) {%>
+            <div>Member Check</div>
+            <%}%>
+        <% } %>
+        <div>
+            Project By Sami
+        </div>    
 </footer>
 </body>
 </html>

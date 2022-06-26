@@ -11,17 +11,12 @@ router.use(function (req, res, next) {
   res.locals.currentUser = req.user;
   res.locals.errors = req.flash("error");
   res.locals.validationErr = validationResult(req).array();
+  res.locals.infos = req.flash("info");
   next();
 });
 
-/* messages before login */
 router.get("/", function (req, res) {
   res.render("index");
-});
-
-/* messages after login */
-router.get("/members", function (req, res) {
-  res.render("members");
 });
 
 router.get("/sign-up", function (req, res) {
@@ -43,7 +38,7 @@ router.post(
     .withMessage("Password must be specified."),
   body(
     "confirmPassword",
-    "Confirm password field must have the same value as the password field."
+    "Password confirmation does not match password."
   ).custom((value, { req }) => value === req.body.password),
 
   (req, res, next) => {
@@ -70,6 +65,7 @@ router.post(
         const user = new User({
           username: req.body.username,
           password: hashedPassword,
+          membershipStatus: false,
         }).save((err) => {
           if (err) {
             return next(err);
@@ -84,7 +80,7 @@ router.post(
 router.post(
   "/sign-up",
   passport.authenticate("local", {
-    successRedirect: "/members",
+    successRedirect: "/",
     failureRedirect: "/sign-up",
     failureFlash: true,
   })
@@ -97,8 +93,9 @@ router.get("/log-in", function (req, res) {
 router.post(
   "/log-in",
   passport.authenticate("local", {
-    successRedirect: "/members",
+    successRedirect: "/",
     failureRedirect: "/log-in",
+    failureFlash: true,
   })
 );
 
@@ -110,5 +107,36 @@ router.get("/log-out", (req, res) => {
     res.redirect("/");
   });
 });
+
+router.get("/membership", (req, res) => {
+  res.render("membership");
+});
+
+router.post(
+  "/membership",
+  body("passcode", "Passcode is incorrect.").custom(
+    (value) => value === "webdev"
+  ),
+  (req, res, next) => {
+    if (!validationResult(req).isEmpty()) {
+      res.render("membership", {
+        validationErr: validationResult(req).array(),
+      });
+    }
+    //find user id and update membership
+    const id = { _id: req.body.id };
+    const update = { membershipStatus: true };
+
+    User.findByIdAndUpdate(id, update, function (err, result) {
+      if (err) {
+        return next(err);
+      }
+      if (result) {
+        req.flash("info", "You have gained membership status.");
+        res.redirect("/");
+      }
+    });
+  }
+);
 
 module.exports = router;

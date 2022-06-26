@@ -1,0 +1,13 @@
+<% include _header %> <% if (currentUser.membershipStatus === true) {%>
+<div>You are already a member.</div>
+<%} else {%>
+<form action="" method="post">
+  <label for="passcode">Secret Passcode:</label>
+  <input id="passcode" name="passcode" type="text" />
+  <input name="id" type="hidden" value="<%= currentUser.id %>" />
+  <button>Submit</button>
+</form>
+<%}%> <% if (validationErr.length) {%> <% validationErr.forEach(function(valErr)
+{ %>
+<div><%= valErr.msg %></div>
+<% }) %> <%}%> <% include _footer %>
