@@ -5,8 +5,10 @@ The Odin Project Curriculum - Full Stack JavaScript Path - NodeJS Section - Proj
 Goal: Create an app where a user can create an account, become a member and admin and have different abilities and permissions.
 
 [Demo Link](https://gentle-oasis-34070.herokuapp.com/)
-Member passcode : webdev
-Admin passcode : webdevadmin
+
+Member passcode: webdev
+
+Admin passcode: webdevadmin
 
 ## Features:
 
