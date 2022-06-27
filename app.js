@@ -7,12 +7,12 @@ const session = require("express-session");
 const passport = require("passport");
 const mongoose = require("mongoose");
 var flash = require("connect-flash");
+require("dotenv").config();
 
 var routes = require("./routes/routes");
 const setUpPassport = require("./setuppassport");
 
-const mongoDb =
-  "mongodb+srv://members-only:members-only666@cluster0.rlfq1bo.mongodb.net/members_only2?retryWrites=true&w=majority";
+const mongoDb = process.env.MONGODB_URL;
 mongoose.connect(mongoDb, { useUnifiedTopology: true, useNewUrlParser: true });
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "mongo connection error"));
