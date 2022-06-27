@@ -3,6 +3,7 @@ const passport = require("passport");
 const bcrypt = require("bcryptjs");
 var router = express.Router();
 const { body, validationResult } = require("express-validator");
+const { DateTime } = require("luxon");
 
 const User = require("../models/user");
 const Message = require("../models/message");
@@ -16,7 +17,7 @@ router.use(function (req, res, next) {
   next();
 });
 
-router.get("/", function (req, res) {
+router.get("/", function (req, res, next) {
   Message.find()
     .sort({ createdAt: "descending" })
     .exec(function (err, msg) {
@@ -52,7 +53,9 @@ router.post(
   (req, res, next) => {
     // if errors from above
     if (!validationResult(req).isEmpty()) {
-      res.render("signup", { validationErr: validationResult(req).array() });
+      return res.render("signup", {
+        validationErr: validationResult(req).array(),
+      });
     }
 
     // check if the same username exist
@@ -78,7 +81,7 @@ router.post(
           if (err) {
             return next(err);
           }
-          next();
+          return next();
         });
       });
     });
@@ -107,7 +110,7 @@ router.post(
   })
 );
 
-router.get("/log-out", (req, res) => {
+router.get("/log-out", (req, res, next) => {
   req.logout(function (err) {
     if (err) {
       return next(err);
@@ -127,7 +130,7 @@ router.post(
   ),
   (req, res, next) => {
     if (!validationResult(req).isEmpty()) {
-      res.render("membership", {
+      return res.render("membership", {
         validationErr: validationResult(req).array(),
       });
     }
@@ -141,7 +144,7 @@ router.post(
       }
       if (result) {
         req.flash("info", "You have gained membership status.");
-        res.redirect("/");
+        return res.redirect("/");
       }
     });
   }
@@ -165,21 +168,23 @@ router.post(
     .withMessage("Message must be specified."),
   (req, res, next) => {
     if (!validationResult(req).isEmpty()) {
-      res.render("message-form", {
+      return res.render("message-form", {
         validationErr: validationResult(req).array(),
       });
     }
     new Message({
       title: req.body.title,
       text: req.body.message,
-      createdAt: Date.now(),
+      createdAt: DateTime.now().toLocaleString(
+        DateTime.DATETIME_MED_WITH_SECONDS
+      ),
       author: req.body.author,
     }).save((err) => {
       if (err) {
         return next(err);
       }
       req.flash("info", "Message created");
-      res.redirect("/");
+      return res.redirect("/");
     });
   }
 );
