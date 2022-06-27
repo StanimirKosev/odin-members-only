@@ -79,6 +79,7 @@ a[href*="github"] {
   gap: 5px;
 }
 
+img[src*="admin"],
 img[src*="hiks"],
 img[src*="check-green"],
 img[src*="user"],
@@ -93,6 +94,7 @@ footer {
   align-items: center;
 }
 
+.admin-form,
 .membership-form,
 .message-form,
 .signup-form,
@@ -110,6 +112,7 @@ footer {
   box-shadow: 5px 5px 5px #141414;
 }
 
+.admin-form > *:not(form, .error),
 .message-form > *:not(form, .error),
 .membership-form > *:not(form, .error),
 .login-form > *:not(form, .error),
@@ -148,7 +151,7 @@ input:focus {
 }
 
 .error {
-  color: red;
+  color: crimson;
 }
 
 button {
@@ -233,4 +236,32 @@ img[alt*="messageUser"] {
   display: flex;
   align-items: center;
   gap: 5px;
+}
+
+.message-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+img[src*="trash"] {
+  width: 33px;
+  height: 33px;
+  cursor: pointer;
+}
+
+img[src*="trash"]:hover {
+  opacity: 0.7;
+}
+
+.delete-btn {
+  padding: 0;
+  margin: 0;
+  background-color: #0f0f0f;
+  border: none;
+}
+
+form > .delete-btn > * {
+  display: flex;
+  align-items: center;
 }

@@ -7,6 +7,7 @@ const User = mongoose.model(
     username: { type: String, required: true },
     password: { type: String, required: true },
     membershipStatus: Boolean,
+    admin: Boolean,
   })
 );
 

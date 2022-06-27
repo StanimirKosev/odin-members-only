@@ -4,7 +4,18 @@
   <div class="info"><%= info %></div>
   <% }) %> <% msg.forEach(msg => {%>
   <div class="message">
-    <div><strong><%= msg.title %></strong></div>
+    <div class="message-header">
+      <div><strong><%= msg.title %></strong></div>
+      <!-- show delete button only when user is an admin -->
+      <% if (currentUser) {%> <% if (currentUser.admin === true) {%>
+      <form action="" method="post">
+        <button class="delete-btn">
+          <img src="images/trash.png" alt="" />
+          <input type="hidden" value="<%= msg.id %>" name="msg_id" />
+        </button>
+      </form>
+      <%}%> <%}%>
+    </div>
     <div class="text"><%= msg.text %></div>
     <!-- show author and date only when user is a member -->
     <% if (currentUser) {%> <% if (currentUser.membershipStatus === true) {%>

@@ -28,6 +28,16 @@ router.get("/", function (req, res, next) {
     });
 });
 
+router.post("/", (req, res, next) => {
+  Message.findByIdAndDelete(req.body.msg_id, (err) => {
+    if (err) {
+      return next(err);
+    }
+    req.flash("info", "Message deleted.");
+    return res.redirect("/");
+  });
+});
+
 router.get("/sign-up", function (req, res) {
   res.render("signup");
 });
@@ -77,6 +87,7 @@ router.post(
           username: req.body.username,
           password: hashedPassword,
           membershipStatus: false,
+          admin: false,
         }).save((err) => {
           if (err) {
             return next(err);
@@ -188,4 +199,36 @@ router.post(
     });
   }
 );
+
+router.get("/admin", (req, res) => {
+  res.render("admin");
+});
+
+router.post(
+  "/admin",
+  body("admin", "Passcode is incorrect.").custom(
+    (value) => value === "webdevadmin"
+  ),
+  (req, res, next) => {
+    if (!validationResult(req).isEmpty()) {
+      return res.render("admin", {
+        validationErr: validationResult(req).array(),
+      });
+    }
+    //find user id and update membership
+    const id = { _id: req.body.id };
+    const update = { admin: true };
+
+    User.findByIdAndUpdate(id, update, function (err, result) {
+      if (err) {
+        return next(err);
+      }
+      if (result) {
+        req.flash("info", "You have become an admin.");
+        return res.redirect("/");
+      }
+    });
+  }
+);
+
 module.exports = router;

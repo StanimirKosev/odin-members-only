@@ -3,9 +3,9 @@
   <% if (currentUser.membershipStatus === true) {%>
   <h1>You are already a member.<h1>
   <%} else {%>
-  <h1>Become one of us.</h1>
+  <h1>Become a member.</h1>
   <form action="" method="post">
-    <input name="passcode" type="password" placeholder="Secret passcode" />
+    <input name="passcode" type="password" placeholder="Secret membership passcode" />
     <input name="id" type="hidden" value="<%= currentUser.id %>" />
     <button>Submit</button>
   </form>

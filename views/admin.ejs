@@ -1,0 +1,17 @@
+<% include _header %> 
+<div class="admin-form">
+    <% if (currentUser.admin === true) {%>
+    <h1>You are already an admin.<h1>
+    <%} else {%>
+    <h1>Become an admin.</h1>
+    <form action="" method="post">
+      <input name="admin" type="password" placeholder="Secret admin passcode" />
+      <input name="id" type="hidden" value="<%= currentUser.id %>" />
+      <button>Submit</button>
+    </form>
+    <%}%> <% if (validationErr.length) {%> <%
+    validationErr.forEach(function(valErr) { %>
+    <div class="error"><%= valErr.msg %></div>
+    <% }) %> <%}%>
+  </div>
+<% include _footer %>

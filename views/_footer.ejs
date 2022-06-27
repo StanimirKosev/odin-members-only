@@ -9,6 +9,11 @@
             <%} else {%>
               <div>Membership    <img src="images/hiks.png" alt=""/></div>
           <%}%>
+          <% if (currentUser.admin === true) {%>
+            <div>Admin<img src="images/check-green.png" alt=""/></div>
+            <%} else {%>
+              <div>Admin<img src="images/hiks.png" alt=""/></div>
+          <%}%>
         <% } %>
       </div>
 </footer>
